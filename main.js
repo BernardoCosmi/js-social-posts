@@ -65,7 +65,7 @@ posts.forEach(post => {
     const postElementHTML = document.createElement("div");
     postElementHTML.classList.add("post");
 
-    //ANCHOR HEADER SECTION
+    //SECTION HEADER 
 
     //generazione header-div
     const postHeaderHTML = document.createElement("div");
@@ -109,12 +109,32 @@ posts.forEach(post => {
     postMetaHTML.appendChild(postMetaDataHTML);
     postHeaderHTML.appendChild(postMetaHTML);
 
-    //ANCHOR Appendo la struttura dell'header generata al post
+    //ANCHOR appendo la struttura dell'header generata al post
     postElementHTML.appendChild(postHeaderHTML);
 
-    //ANCHOR TEXT SECTION
+    //SECTION TEXT 
+    //generazione sezioni di testo
+    const postTextHTML = document.createElement("div");
+    postTextHTML.classList.add("post__text");
+    postTextHTML.textContent = post.content
 
-    //ANCHOR IMG SECTION
+    //ANCHOR appendo il testo nel post
+    postElementHTML.appendChild(postTextHTML)
+
+    //SECTION IMG 
+    //generazione contenitore img
+    const postImageDivHTML = document.createElement("div");
+    postImageDivHTML.classList.add("post__image")
+
+    //generazione e recupero dati img
+    const postImageHTML = document.createElement("img");
+    postImageHTML.src = post.media;
+
+    //appendo l'immagine nel div
+    postImageDivHTML.appendChild(postImageHTML)
+
+    //ANCHOR appendo l'immagine nel post
+    postElementHTML.appendChild(postImageDivHTML);
 
     //ANCHOR FOOTER SECTION
 
