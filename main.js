@@ -8,7 +8,7 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=12"
         },
         "likes": 80,
-        "created": "2021-06-25"
+        "created": "06-25-2021"
     },
     {
         "id": 2,
@@ -19,7 +19,7 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=10"
         },
         "likes": 120,
-        "created": "2021-09-03"
+        "created": "09-03-2021"
     },
     {
         "id": 3,
@@ -30,7 +30,7 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=20"
         },
         "likes": 78,
-        "created": "2021-05-15"
+        "created": "05-15-2021"
     },
     {
         "id": 4,
@@ -41,7 +41,7 @@ const posts = [
             "image": null
         },
         "likes": 56,
-        "created": "2021-04-03"
+        "created": "04-03-2021"
     },
     {
         "id": 5,
@@ -52,7 +52,7 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=29"
         },
         "likes": 95,
-        "created": "2021-03-05"
+        "created": "03-05-2021"
     }
 ];
 
@@ -84,7 +84,6 @@ posts.forEach(post => {
     profilePicHTML.classList.add("profile-pic");
     profilePicHTML.src = post.author.image;
     profilePicHTML.alt = post.author.name;
-    console.log(profilePicHTML.src)
 
     //TODO mettere in formato mm-gg-aaaa
     //generazione meta data
@@ -136,7 +135,52 @@ posts.forEach(post => {
     //ANCHOR appendo l'immagine nel post
     postElementHTML.appendChild(postImageDivHTML);
 
-    //ANCHOR FOOTER SECTION
+    //SECTION FOOTER 
+    //generazione contenitore footer
+    const postFooterHTML = document.createElement("div");
+    postFooterHTML.classList.add("post__footer")
+
+    //generazione likes div
+    const likeHTML = document.createElement("div");
+    likeHTML.classList.add("likes")
+
+    //generazione likes btn
+    const likeButtonHTML  = document.createElement("a");
+    likeButtonHTML.classList.add("like-button", "js-like-button")
+
+    //generazione likes icon
+    const likeIconHTML = document.createElement("i");
+    likeIconHTML.classList.add("like-button__icon", "fas", "fa-thumbs-up")
+
+    //generazione like button label
+    const likeBtnLabelHTML = document.createElement("span");
+    likeBtnLabelHTML.classList.add("like-button__label")
+    likeBtnLabelHTML.textContent = " Mi Piace";
+
+    //generazione like counter container
+    const likeCounterDivHTML = document.createElement("div");
+    likeCounterDivHTML.classList.add("likes__counter")
+
+    //generazione like counter
+    const likeCounterHTML = document.createElement("b");
+    likeCounterHTML.classList.add("js-likes-counter")
+    likeCounterHTML.id = `like-counter-${post.id}`
+    likeCounterHTML.textContent = post.likes;
+
+    //appendo tutto il like btn
+    likeButtonHTML.appendChild(likeIconHTML);
+    likeButtonHTML.appendChild(likeBtnLabelHTML);
+    likeHTML.appendChild(likeButtonHTML);
+
+    //appendo il counter dei like
+    likeCounterDivHTML.textContent = 'Piace a ';
+    likeCounterDivHTML.appendChild(likeCounterHTML)
+    likeCounterDivHTML.textContent += ' persone';
+    likeHTML.appendChild(likeCounterDivHTML);
+
+    //ANCHOR appendo il footer nel post
+    postFooterHTML.appendChild(likeHTML)
+    postElementHTML.appendChild(postFooterHTML);
 
     //ANCHOR Appendo il post completo (in teoria) al container principale
     containerHTML.appendChild(postElementHTML);
