@@ -58,6 +58,7 @@ const posts = [
 
 
 const containerHTML = document.getElementById("container")
+const likedPost = []
 
 posts.forEach(post => {
 
@@ -174,9 +175,50 @@ posts.forEach(post => {
 
     //appendo il counter dei like
     likeCounterDivHTML.textContent = 'Piace a ';
-    likeCounterDivHTML.appendChild(likeCounterHTML)
+    likeCounterDivHTML.appendChild(likeCounterHTML);
     likeCounterDivHTML.textContent += ' persone';
     likeHTML.appendChild(likeCounterDivHTML);
+
+    //SECTION Eventi dinamici counter dei like
+    // Genera un ID univoco per il contatore dei like
+    const uniqueLikeCounterID = `like-counter-${post.id}`;
+
+    // Cambia l'ID del contatore dei like
+    likeCounterHTML.id = uniqueLikeCounterID;
+
+    likeButtonHTML.addEventListener("click", function() {
+
+        // c'è già "mi piace"?
+        const isLiked = likedPost.includes(post.id);
+    
+        if (!isLiked) {
+            // Aggiungi il post ai likedPosts
+            likedPost.push(post.id);
+
+            // Aggiorna l'aspetto del pulsante e il contatore dei like
+            likeButtonHTML.classList.add("like-button--liked");
+            likeCounterHTML.textContent = post.likes + 1;
+            likeCounterDivHTML.textContent = 'Piace a ';
+            likeCounterDivHTML.appendChild(likeCounterHTML);
+            likeCounterDivHTML.textContent += ' persone';
+            likeHTML.appendChild(likeCounterDivHTML);
+
+        } else if(isLiked){
+
+            // Rimuovi il post dai likedPosts
+            const index = likedPost.indexOf(post.id);
+            likedPost.splice(index, 1);
+
+            // Ripristina l'aspetto del pulsante e il contatore dei like
+            likeButtonHTML.classList.remove("like-button--liked");
+            likeCounterHTML.textContent = post.likes;
+            likeCounterDivHTML.textContent = 'Piace a ';
+            likeCounterDivHTML.appendChild(likeCounterHTML);
+            likeCounterDivHTML.textContent += ' persone';
+            likeHTML.appendChild(likeCounterDivHTML);
+        }
+        console.log(likedPost)
+    })
 
     //ANCHOR appendo il footer nel post
     postFooterHTML.appendChild(likeHTML)
@@ -184,6 +226,8 @@ posts.forEach(post => {
 
     //ANCHOR Appendo il post completo (in teoria) al container principale
     containerHTML.appendChild(postElementHTML);
+
+    
 });
 
 
