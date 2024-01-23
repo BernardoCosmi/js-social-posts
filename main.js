@@ -5,7 +5,7 @@ const posts = [
         "media": "https://unsplash.it/600/300?image=171",
         "author": {
             "name": "Phil Mangione",
-            "image": "https://unsplash.it/300/300?image=15"
+            "image": "https://unsplash.it/300/300?image=12"
         },
         "likes": 80,
         "created": "2021-06-25"
@@ -55,3 +55,95 @@ const posts = [
         "created": "2021-03-05"
     }
 ];
+
+
+const containerHTML = document.getElementById("container")
+
+posts.forEach(post => {
+
+    //generazione del post
+    const postElementHTML = document.createElement("div");
+    postElementHTML.classList.add("post");
+
+    //ANCHOR HEADER SECTION
+
+    //generazione header-div
+    const postHeaderHTML = document.createElement("div");
+    postHeaderHTML.classList.add("post__header");
+
+    //generazione meta del post
+    const postMetaHTML = document.createElement("div");
+    postMetaHTML.classList.add("post-meta");
+
+    //generazione meta icon
+    const postMetaIconHTML = document.createElement("div");
+    postMetaIconHTML.classList.add("post-meta__icon");
+
+    //generazione profile pic
+    const profilePicHTML = document.createElement("img");
+    profilePicHTML.classList.add("profile-pic");
+    profilePicHTML.src = post.author.image;
+    profilePicHTML.alt = post.author.name;
+    console.log(profilePicHTML.src)
+
+    //TODO mettere in formato mm-gg-aaaa
+    //generazione meta data
+    const postMetaDataHTML = document.createElement("div");
+    postMetaDataHTML.classList.add("post-meta__data");
+
+    //generazione meta author
+    const postMetaAuthorHTML = document.createElement("div");
+    postMetaAuthorHTML.classList.add("post-meta__author");
+    postMetaAuthorHTML.textContent = post.author.name;
+
+    //generazione meta time
+    const postMetaTimeHTML = document.createElement("div");
+    postMetaTimeHTML.classList.add("post-meta__time");
+    postMetaTimeHTML.textContent = post.created;
+    
+    //appendo la struttura dell'header generata
+    postMetaIconHTML.appendChild(profilePicHTML);
+    postMetaDataHTML.appendChild(postMetaAuthorHTML);
+    postMetaDataHTML.appendChild(postMetaTimeHTML);
+    postMetaHTML.appendChild(postMetaIconHTML);
+    postMetaHTML.appendChild(postMetaDataHTML);
+    postHeaderHTML.appendChild(postMetaHTML);
+
+    //ANCHOR Appendo la struttura dell'header generata al post
+    postElementHTML.appendChild(postHeaderHTML);
+
+    //ANCHOR TEXT SECTION
+
+    //ANCHOR IMG SECTION
+
+    //ANCHOR FOOTER SECTION
+
+    //ANCHOR Appendo il post completo (in teoria) al container principale
+    containerHTML.appendChild(postElementHTML);
+});
+
+
+
+/*
+Descrizione
+Ricreiamo un feed social aggiungendo al layout di base fornito, il nostro script JS in cui:
+
+Milestone 1 - Creiamo il nostro array di oggetti che rappresentano ciascun post.
+Ogni post dovrà avere le informazioni necessarie per stampare la relativa card:
+- id del post, numero progressivo da 1 a n
+- nome autore,
+- foto autore,
+- data in formato americano (mm-gg-yyyy),
+- testo del post,
+- immagine (non tutti i post devono avere una immagine),
+- numero di likes.
+Non è necessario creare date casuali
+Per le immagini va bene utilizzare qualsiasi servizio di placeholder ad es. Unsplash (https://unsplash.it/300/300?image=<id>)
+Milestone 2 - Prendendo come riferimento il layout di esempio presente nell'html, stampiamo i post del nostro feed.
+Milestone 3 - Se clicchiamo sul tasto "Mi Piace" cambiamo il colore al testo del bottone e incrementiamo il counter dei likes relativo.
+Salviamo in un secondo array gli id dei post ai quali abbiamo messo il like.
+BONUS:
+Formattare le date in formato italiano (gg/mm/aaaa)
+Gestire l'assenza dell'immagine profilo con un elemento di fallback che contiene le iniziali dell'utente (es. Luca Formicola > LF).
+Al click su un pulsante "Mi Piace" di un post, se abbiamo già cliccato dobbiamo decrementare il contatore e cambiare il colore del bottone.
+*/
